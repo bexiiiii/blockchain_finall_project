@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  protocol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Install Slither
+        run: pipx install slither-analyzer
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm --prefix frontend ci
+          forge install foundry-rs/forge-std
+
+      - name: Reject Hardhat
+        run: npm run guard:no-hardhat
+
+      - name: Solidity checks
+        run: |
+          forge fmt --check
+          forge build --sizes
+          forge test -vvv
+          forge coverage --ir-minimum --report summary --no-match-coverage 'script|test|src/mocks'
+          npm run lint:sol
+          slither . --filter-paths "test|script|node_modules|lib" --exclude-dependencies
+
+      - name: Frontend build
+        run: npm --prefix frontend run build

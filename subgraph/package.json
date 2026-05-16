@@ -1,0 +1,14 @@
+{
+  "name": "rwa-tbill-subgraph",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "codegen": "graph codegen subgraph.yaml --output-dir generated",
+    "build": "graph build subgraph.yaml",
+    "deploy": "graph deploy --studio rwa-tbill-protocol subgraph.yaml"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.98.1",
+    "@graphprotocol/graph-ts": "0.38.2"
+  }
+}

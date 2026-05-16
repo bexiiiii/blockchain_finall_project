@@ -1,0 +1,83 @@
+type Asset @entity(immutable: false) {
+  id: ID!
+  totalMinted: BigInt!
+  totalBurned: BigInt!
+  registry: Bytes
+  updatedAt: BigInt!
+}
+
+type AssetTransfer @entity(immutable: true) {
+  id: ID!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  txHash: Bytes!
+}
+
+type VaultAction @entity(immutable: true) {
+  id: ID!
+  action: String!
+  caller: Bytes!
+  owner: Bytes
+  receiver: Bytes
+  assets: BigInt!
+  shares: BigInt!
+  timestamp: BigInt!
+  txHash: Bytes!
+}
+
+type LiquidityPosition @entity(immutable: false) {
+  id: ID!
+  provider: Bytes!
+  liquidity: BigInt!
+  amount0: BigInt!
+  amount1: BigInt!
+  updatedAt: BigInt!
+}
+
+type Swap @entity(immutable: true) {
+  id: ID!
+  trader: Bytes!
+  tokenIn: Bytes!
+  amountIn: BigInt!
+  amountOut: BigInt!
+  to: Bytes!
+  timestamp: BigInt!
+  txHash: Bytes!
+}
+
+type Proposal @entity(immutable: false) {
+  id: ID!
+  proposalId: BigInt!
+  proposer: Bytes!
+  description: String!
+  state: String!
+  voteStart: BigInt!
+  voteEnd: BigInt!
+  queuedAt: BigInt
+  executedAt: BigInt
+  createdAt: BigInt!
+}
+
+type VoteCast @entity(immutable: true) {
+  id: ID!
+  proposal: Proposal!
+  voter: Bytes!
+  support: Int!
+  weight: BigInt!
+  reason: String!
+  timestamp: BigInt!
+}
+
+type TreasuryPayment @entity(immutable: true) {
+  id: ID!
+  paymentType: String!
+  token: Bytes
+  payee: Bytes!
+  amount: BigInt!
+  status: String!
+  timestamp: BigInt!
+  txHash: Bytes!
+}
