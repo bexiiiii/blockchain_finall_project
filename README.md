@@ -137,3 +137,13 @@ Generate PDF copies:
 ```bash
 npm run docs:pdf
 ```
+
+## Documentation Structure
+
+The repository separates protocol logic, frontend integration, deployment artifacts, and reporting documents into dedicated directories for easier auditing and maintenance.
+
+Key areas:
+- `src/` — Solidity smart contracts
+- `frontend/` — React dApp
+- `subgraph/` — The Graph indexing configuration
+- `docs/` — architecture, audit, gas, coverage, and deployment reports
