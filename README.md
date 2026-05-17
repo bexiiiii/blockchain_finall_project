@@ -110,6 +110,22 @@ npm --prefix frontend run dev
 
 The dApp reads balances, voting power, delegate address, vault assets/shares, AMM reserves, and oracle state. It writes vault deposits/withdrawals, AMM liquidity/swaps, governance delegation, and proposal votes.
 
+### Frontend Interaction Flow
+
+The frontend is designed as a governance-aware dashboard for interacting with the full RWA protocol stack.
+
+Core interaction flows include:
+- ERC20 asset balance tracking
+- ERC4626 vault deposit and withdrawal execution
+- AMM liquidity provisioning and token swap execution
+- governance delegation and proposal voting
+- oracle visibility and reserve state monitoring
+- live indexed protocol analytics through The Graph subgraph
+
+The interface uses Wagmi + Viem for contract interactions and RainbowKit for wallet onboarding and multi-wallet support.
+
+Frontend state synchronization combines direct on-chain reads with indexed subgraph queries to reduce RPC overhead and improve dashboard responsiveness.
+
 ## Subgraph
 
 Update addresses in `subgraph/subgraph.yaml` after deployment, then:
