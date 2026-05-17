@@ -1,0 +1,39 @@
+{
+  "name": "rwa-tbill-protocol",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Foundry + Anvil RWA tokenization capstone protocol for tokenized T-Bills.",
+  "type": "module",
+  "scripts": {
+    "build": "forge build && npm --prefix frontend run build",
+    "test": "forge test",
+    "coverage": "forge coverage --ir-minimum --report summary --report lcov --no-match-coverage 'script|test|src/mocks'",
+    "fmt:check": "forge fmt --check && prettier --check \"{frontend,subgraph,docs}/**/*.{ts,tsx,js,json,md,graphql,yaml,yml}\"",
+    "fmt": "forge fmt && prettier --write \"{frontend,subgraph,docs}/**/*.{ts,tsx,js,json,md,graphql,yaml,yml}\"",
+    "lint:sol": "solhint 'src/**/*.sol' 'script/**/*.sol' 'test/**/*.sol'",
+    "lint:frontend": "npm --prefix frontend run lint",
+    "guard:no-hardhat": "node scripts/assert-no-hardhat.mjs",
+    "ci": "npm run guard:no-hardhat && forge build && forge test && forge coverage --ir-minimum --report summary --no-match-coverage 'script|test|src/mocks' && forge fmt --check && npm run lint:sol && npm --prefix frontend run build",
+    "anvil": "anvil --chain-id 31337",
+    "deploy:anvil": "forge script script/Deploy.s.sol:Deploy --rpc-url http://127.0.0.1:8545 --broadcast",
+    "deploy:base-sepolia": "forge script script/Deploy.s.sol:Deploy --rpc-url \"$BASE_SEPOLIA_RPC_URL\" --broadcast --verify --etherscan-api-key \"$BASESCAN_API_KEY\"",
+    "verify:base-sepolia": "forge script script/VerifyDeployment.s.sol:VerifyDeployment --rpc-url \"$BASE_SEPOLIA_RPC_URL\"",
+    "subgraph:codegen": "graph codegen subgraph/subgraph.yaml --output-dir subgraph/generated",
+    "subgraph:build": "graph build subgraph/subgraph.yaml",
+    "subgraph:deploy": "graph deploy --studio rwa-tbill-protocol subgraph/subgraph.yaml",
+    "docs:pdf": "node scripts/docs-to-pdf.mjs"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.6.1",
+    "@openzeppelin/contracts-upgradeable": "5.6.1"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "0.98.1",
+    "@graphprotocol/graph-ts": "0.38.2",
+    "prettier": "3.7.4",
+    "solhint": "6.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
