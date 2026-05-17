@@ -70,3 +70,14 @@ forge script script/GasCompare.s.sol:GasCompare --rpc-url "$BASE_SEPOLIA_RPC_URL
 ```
 
 Then update this report with transaction hashes or script output references. The current local report is complete for Anvil and ready to be extended once deployment secrets are available.
+
+
+### Base Sepolia Verification Notes
+
+Deployment verification is performed through Basescan after broadcasting contracts with Foundry scripts.
+
+The final report will include:
+- deployed contract addresses
+- Basescan verification links
+- subgraph deployment reference
+- benchmark transaction references
