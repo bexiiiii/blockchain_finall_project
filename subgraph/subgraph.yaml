@@ -129,3 +129,5 @@ dataSources:
         - event: EthPaymentWithdrawn(indexed address,uint256)
           handler: handleEthPaymentWithdrawn
       file: ./src/mappings.ts
+      # Base Sepolia deployment configuration
+# Updated for production-style indexing flow
