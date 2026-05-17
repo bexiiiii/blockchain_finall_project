@@ -77,3 +77,16 @@ npm run verify:base-sepolia
 | `ProtocolFactory`           | TBD                  | TBD                        |
 | `RwaGovernor`               | TBD                  | TBD                        |
 | `TimelockController`        | TBD                  | TBD                        |
+## Deployment Integrity Notes
+
+The verification process also validates the operational ownership transition from the deployer account to governance-controlled contracts.
+
+Special attention is given to:
+- Timelock ownership transfer
+- UUPS upgrade authorization flow
+- treasury governance restrictions
+- governor proposal execution permissions
+- proxy implementation consistency
+- protocol role isolation after deployment
+
+The deployment review ensures that no privileged deployer access remains active after initialization and governance activation.
